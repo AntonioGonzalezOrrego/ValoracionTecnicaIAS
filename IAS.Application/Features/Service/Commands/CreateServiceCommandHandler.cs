@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IAS.Application.Contracts.Persistence;
+using IAS.Domain.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -20,8 +21,8 @@ namespace IAS.Application.Features.Service.Commands
 
     public async Task<int> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
     {
-      var serviceEntity = _mapper.Map<Service>(request);
-      _unitOfWork.ServiceRepository.Add(serviceEntity);
+      var serviceEntity = _mapper.Map<Domain.Models.Service>(request);
+      _unitOfWork.ServiceRepository.AddEntity(serviceEntity);
       var result = await _unitOfWork.Complete();
 
       if (result <= 0)

@@ -1,18 +1,14 @@
-﻿using IAS.Domain.Common;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using IAS.Domain.Models;
 
-namespace IAS.Domain.Models
+namespace IAS.Application.Features.Service.Queries.Vms
 {
-  public class Service : BaseDomainModel
+  public class ServiceVm
   {
     public int Id { get; set; }
-    [Column(TypeName = "varchar(30)")]
     public string? Addres { get; set; }
-    [Column(TypeName = "varchar(100)")]
     public string? Description { get; set; }
     public string? InitDateService { get; set; }
     public string? EndDateAndTimeService { get; set; }
-    public int TechnicianId { get; set; }
     public virtual Technician? Technician { get; set; }
   }
 }

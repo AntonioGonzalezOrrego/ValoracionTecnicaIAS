@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 
 namespace IAS.Infrastructure.Repositories
 {
-  public class RepositotyBase<T> : IAsyncRepository<T> where T : BaseDomainModel
+  public class RepositoryBase<T> : IAsyncRepository<T> where T : BaseDomainModel
   {
 
     protected readonly ServiceDbContext _context;
 
-    public RepositotyBase(ServiceDbContext context)
+    public RepositoryBase(ServiceDbContext context)
     {
       _context = context;
     }
@@ -28,14 +28,14 @@ namespace IAS.Infrastructure.Repositories
       _context.Set<T>().Add(entity);
     }
 
-    public Task<IReadOnlyList<T>> GetAllAsync()
+    public async Task<IReadOnlyList<T>> GetAllAsync()
     {
-      throw new NotImplementedException();
+      return await _context.Set<T>().ToListAsync();
     }
 
-    public Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate)
+    public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate)
     {
-      throw new NotImplementedException();
+      return await _context.Set<T>().Where(predicate).ToListAsync();
     }
 
     public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>>? predicate = null,
@@ -69,9 +69,9 @@ namespace IAS.Infrastructure.Repositories
       return await query.ToListAsync();
     }
 
-    public Task<T> GetByIdAsync(int id)
+    public async Task<T> GetByIdAsync(int id)
     {
-      throw new NotImplementedException();
+      return await _context.Set<T>().FindAsync(id);
     }
   }
 }

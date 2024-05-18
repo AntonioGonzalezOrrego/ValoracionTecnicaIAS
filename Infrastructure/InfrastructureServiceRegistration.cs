@@ -9,14 +9,14 @@ namespace IAS.Infrastructure
 {
   public static class InfrastructureServiceRegistration
   {
-    public static IServiceCollection InfrastructureServiceRegistration(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
       services.AddDbContext<ServiceDbContext>(options =>
       options.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
 
       services.AddScoped<IUnitOfWork, UnitOfWork>();
-      services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositotyBase<>));
-      services.AddScoped(IServiceRepository, ServiceRepository);
+      services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
+      services.AddScoped<IServiceRepository, ServiceRepository>();
 
       return services;
     }

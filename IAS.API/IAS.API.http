@@ -1,4 +1,4 @@
-@IAS.API_HostAddress = http://localhost:5001
+@IAS.API_HostAddress = http://localhost:5112
 
 GET {{IAS.API_HostAddress}}/weatherforecast/
 Accept: application/json

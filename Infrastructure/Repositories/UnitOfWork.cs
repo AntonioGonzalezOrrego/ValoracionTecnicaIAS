@@ -14,14 +14,12 @@ namespace IAS.Infrastructure.Repositories
 
     public IServiceRepository ServiceRepository => _serviceRepository ??= new ServiceRepository(_context);
 
-    public UnitOfWork(Hashtable repositories, ServiceDbContext context)
+    public UnitOfWork(ServiceDbContext context)
     {
-      _repositories = repositories;
       _context = context;
-    }
-    
+    }   
 
-    public ServiceDbContext serviceDbContext => _context;
+    public ServiceDbContext ServiceDbContext => _context;
 
     public async Task<int> Complete()
     {
@@ -41,7 +39,7 @@ namespace IAS.Infrastructure.Repositories
 
     public IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel
     {
-      if(_serviceRepository == null)
+      if (_repositories == null)
       {
         _repositories = new Hashtable();
       }
@@ -50,11 +48,11 @@ namespace IAS.Infrastructure.Repositories
 
       if (!_repositories.ContainsKey(type))
       {
-        var repositoryType = typeof(RepositotyBase<>);
-        var repositorInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context);
-        _repositories.Add(type, repositorInstance);
-        
+        var repositoryType = typeof(RepositoryBase<>);
+        var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context);
+        _repositories.Add(type, repositoryInstance);
       }
+
       return (IAsyncRepository<TEntity>)_repositories[type];
     }
   }

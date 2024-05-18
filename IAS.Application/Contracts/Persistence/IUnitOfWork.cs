@@ -6,12 +6,6 @@ namespace IAS.Application.Contracts.Persistence
   {
     IServiceRepository ServiceRepository { get; }
     IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel;
-
     Task<int> Complete();
-
-    public void Dispose()
-    {
-      throw new NotImplementedException();
-    }
   }
 }

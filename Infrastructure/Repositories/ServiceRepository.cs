@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IAS.Infrastructure.Repositories
 {
-  public class ServiceRepository : RepositotyBase<Service>, IServiceRepository
+  public class ServiceRepository : RepositoryBase<Service>, IServiceRepository
   {
 
     public ServiceRepository(ServiceDbContext context) : base(context)

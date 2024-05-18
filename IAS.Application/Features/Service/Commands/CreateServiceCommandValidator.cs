@@ -18,12 +18,13 @@ namespace IAS.Application.Features.Service.Commands
         .NotEmpty().WithMessage("{InitDateService} no puede estar en blanco")
         .NotNull();
 
-      RuleFor(p => p.EndDateService)
+      RuleFor(p => p.EndDateAndTimeService)
         .NotEmpty().WithMessage("{EndDateService} no puede estar en blanco")
         .NotNull();
 
-      RuleFor(p => p.TechnicianId)
-        .NotNull();
+      RuleFor(p => p.TechId)
+        .NotNull()
+        .NotEmpty().WithMessage("{TechId} no puede estar en blanco");
     }
   }
 }

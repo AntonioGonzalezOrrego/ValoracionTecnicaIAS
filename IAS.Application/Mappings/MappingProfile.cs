@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IAS.Application.Features.Service.Commands;
+using IAS.Application.Features.Service.Queries.Vms;
 using IAS.Domain.Models;
 
 namespace IAS.Application.Mappings
@@ -9,6 +10,7 @@ namespace IAS.Application.Mappings
     public MappingProfile()
     {
       CreateMap<CreateServiceCommand, Service>();
+      CreateMap<Service,  ServiceVm>();
     }
   }
 }
